@@ -1,0 +1,120 @@
+drop database gdpr1;
+
+drop database gdpr2;
+
+drop database gdpr3;
+
+create database gdpr1;
+use gdpr1;
+
+CREATE TABLE member (
+	membID int(10) PRIMARY KEY NOT NULL ,
+	username VARCHAR(50) NOT NULL,
+	password VARCHAR(50) NOT NULL
+);
+
+INSERT INTO member values (1, 'kavi', 'kavida');
+INSERT INTO member values (2, 'ravi', 'ravida');
+INSERT INTO member values (3, 'bavi', 'bavida');
+INSERT INTO member values (4, 'umesh', 'umeshfdd');
+INSERT INTO member values (5, 'ganesh', 'baverida');
+INSERT INTO member values (6, 'suresh', 'ewrbav');
+
+
+
+CREATE TABLE member_details (
+	membID int(10) PRIMARY KEY NOT NULL ,
+	username VARCHAR(50) NOT NULL,
+	location VARCHAR(50) NOT NULL,
+	status VARCHAR(50) NOT NULL,
+	agbcontID int(10)
+);
+
+INSERT INTO member_details values (1,'kavi','chennai','active',12);
+INSERT INTO member_details values (2,'ravi','trichy','Inactive',18);
+INSERT INTO member_details values (3,'bavi','cuddalore','active',26);
+INSERT INTO member_details values (4,'umesh','vilupuram','Inactive',32);
+INSERT INTO member_details values (5,'ganesh','panruti','active',34);
+INSERT INTO member_details values (6,'suresh','pondi','active',23);
+
+
+create database gdpr2;
+use gdpr2;
+
+CREATE TABLE member_dependant (
+	membdeptID INT(10) PRIMARY KEY NOT NULL, 
+	membID INT(10) NOT NULL,
+	deptName VARCHAR(50) NOT NULL,
+	deptRelation VARCHAR(50) NOT NULL
+);
+
+INSERT INTO member_dependant values(11,1,'manisha','spouse');
+INSERT INTO member_dependant values(12,1,'nikitha','daughter');
+INSERT INTO member_dependant values(13,1,'lavanya','spouse');
+INSERT INTO member_dependant values(21,2,'gayathri','wife');
+
+INSERT INTO member_dependant values(31,3,'vanitha','daughter');
+INSERT INTO member_dependant values(32,3,'parameshwari','wife');
+INSERT INTO member_dependant values(41,4,'gowri','wife');
+INSERT INTO member_dependant values(42,4,'rajeshwari','daughter');
+INSERT INTO member_dependant values(51,5,'rajesh','son');
+INSERT INTO member_dependant values(52,5,'mohamaed','brother');
+INSERT INTO member_dependant values(53,5,'vijay','son');
+
+create database gdpr3;
+use gdpr3;
+
+CREATE TABLE claims_raised (
+	membID INT(10) PRIMARY KEY NOT NULL, 	
+	claimID INT(10) NOT NULL,
+	membdeptID INT(10) NOT NULL,
+	membdeptName VARCHAR(50) NOT NULL,
+	claim_amount INT(50) NOT NULL
+);
+
+
+INSERT INTO claims_raised values(1,101,11,'manisha',50000);
+INSERT INTO claims_raised values(1,102,12,'nikitha',10000);
+INSERT INTO claims_raised values(1,103,11,'manisha',20000);
+INSERT INTO claims_raised values(2,201,21,'gayathri',30000);
+INSERT INTO claims_raised values(2,202,21,'gayathri',50000);
+INSERT INTO claims_raised values(3,301,32,'parameshwari',1000);
+INSERT INTO claims_raised values(4,401,42,'rajeshwari',9000);
+INSERT INTO claims_raised values(4,402,42,'rajeshwari',80000);
+INSERT INTO claims_raised values(5,501,53,'vijay',3900);
+
+CREATE TABLE claims_status (
+	claimID INT(10) PRIMARY KEY NOT NULL,
+	status INT(10) NOT NULL
+);
+
+INSERT INTO claims_status values(101,1);
+INSERT INTO claims_status values(102,0);
+INSERT INTO claims_status values(103,1);
+INSERT INTO claims_status values(201,0);
+INSERT INTO claims_status values(202,0);
+INSERT INTO claims_status values(301,1);
+INSERT INTO claims_status values(401,1);
+INSERT INTO claims_status values(402,1);
+INSERT INTO claims_status values(501,0);
+
+
+use gdpr1;
+
+select * from member;
+
+select * from member_details;
+
+
+
+use gdpr2;
+
+select * from member_dependant;
+
+
+
+use gdpr3;
+
+select * from claims_raised;
+
+select * from claims_status;
